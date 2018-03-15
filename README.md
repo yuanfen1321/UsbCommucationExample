@@ -33,4 +33,10 @@ USB Host API
 
 
 技术要点：
-新建线程监听是否有数据到达。采用while(AtomicBoolean)来判断线程是否终止。
+
+host端采用了FileDescriptor获取文件流的方式进行数据的读写（传输）。
+device端是采用了传统的BulkTransfer，对endpoint进行数据读写（传输）。
+对于接收信息，则是采用了一个新的线程的while（Atomicboolean）循环来监听是否有新的数据到达。
+host端和device端所需要的api的封装（要向客户提供api），如打开accessory设备，
+
+困难点byte[]长度的选取。
